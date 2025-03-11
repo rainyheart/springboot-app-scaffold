@@ -1,0 +1,127 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: springboot-app-scaffold-sat
+  labels:
+    app: springboot-app-scaffold-sat
+  namespace: sat
+spec:
+  type: NodePort
+  ports:
+  - port: 13084
+    targetPort: 9000
+    nodePort: 13084
+    name: web
+  - port: 29284
+    targetPort: 29284
+    nodePort: 29284
+    name: rmi
+  clusterIP: 10.96.0.80
+  selector:
+    app: springboot-app-scaffold-sat
+---
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: springboot-app-scaffold-sat-pdb
+  namespace: sat
+spec:
+  selector:
+    matchLabels:
+      app: springboot-app-scaffold-sat
+  maxUnavailable: 1
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: springboot-app-scaffold-sat
+  namespace: sat
+spec:
+  selector:
+    matchLabels:
+      app: springboot-app-scaffold-sat
+  serviceName: springboot-app-scaffold-sat-hs
+  replicas: 1
+  updateStrategy:
+    type: RollingUpdate
+  podManagementPolicy: Parallel
+  template:
+    metadata:
+      labels:
+        app: springboot-app-scaffold-sat
+      annotations:
+        prometheus.io/path: /springboot-app-scaffold/prometheus
+        prometheus.io/port: "9000"
+        prometheus.io/scrape: "true"
+    spec:
+      containers:
+      - name: springboot-app-scaffold
+        imagePullPolicy: Always
+        image: "registry.cn-shenzhen.aliyuncs.com/devops-app/$IMAGE_VERSION_NAME"
+        # resources:
+        #   requests:
+        #     memory: "0.5Gi"
+        #     cpu: "0.5"
+        volumeMounts:
+          - name: logs
+            mountPath: /tmp/springboot-app-scaffold/sat
+          - name: javamelody
+            mountPath: /tmp/springboot-app-scaffold/javamelody
+        ports:
+        - containerPort: 9000
+          name: web
+        - containerPort: 29284
+          name: rmi
+        env:
+        - name: env
+          value: sat
+        - name: RMI_PORT
+          value: "29284"
+        - name: RMI_HOST
+          value: "rmi.example.com"
+        - name: MONITOR_HOST
+          value: "monitoring.example.com"
+        - name: JAVA_XMS
+          value: "256m"
+        - name: JAVA_XMX
+          value: "512m"
+        livenessProbe:
+          httpGet:
+            path: /springboot-app-scaffold/health
+            port: 9000
+          initialDelaySeconds: 10
+          periodSeconds: 30
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /springboot-app-scaffold/health
+            port: 9000
+          initialDelaySeconds: 10
+          periodSeconds: 30
+          timeoutSeconds: 5
+      # nodeSelector:
+      #     name: k8s-mk1
+      dnsPolicy: "None"
+      dnsConfig:
+        nameservers:
+          - 114.114.114.114
+          - 8.8.8.8
+        searches:
+          - ns1.svc.cluster.local
+          - mysql.example.com
+          - db.example.com
+          - rmi.example.com
+          - monitoring.example.com
+        options:
+          - name: ndots
+            value: "2"
+          - name: edns0
+      volumes:
+        - name: logs
+          hostPath:
+            path: /nfs-k8s/shared/logs/springboot-app-scaffold/k8s/sat
+            type: DirectoryOrCreate
+        - name: javamelody
+          hostPath:
+            path: /nfs-k8s/shared/jvm/springboot-app-scaffold/k8s/sat
+            type: DirectoryOrCreate

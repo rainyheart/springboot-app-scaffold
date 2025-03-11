@@ -1,0 +1,87 @@
+pipeline {
+  agent {
+    label 'mk1'
+  }
+  environment {
+        ENV='pre'
+        APP_NAME="springboot-app-scaffold"
+        JAR_FILE_NAME='springboot-app-scaffold.jar'
+        IMAGE_VERSION_FILE='docker.image.version.file' // no need to change, use to stash image version
+        JAVA_TOOL_OPTIONS = '-Duser.home=/var/maven'  // no need to change, use to set inside maven docker
+  }
+  stages {
+    stage('BUILD') {
+      agent {
+        docker {
+          image 'maven:3.6.3-jdk-8' 
+          args '-e MAVEN_CONFIG=/var/maven/.m2 -v /home/jenkins/.m2:/var/maven/.m2' 
+          label 'mk1'
+          reuseNode true
+        }
+      }
+      steps {
+        sh 'mvn clean deploy -U -e -Dmaven.test.skip=true'
+      }
+      
+    }
+    stage('TEST') {
+      agent {
+        docker {
+          image 'maven:3.6.3-jdk-8' 
+          args '-e MAVEN_CONFIG=/var/maven/.m2 -v /home/jenkins/.m2:/var/maven/.m2' 
+          label 'mk1'
+          reuseNode true
+        }
+      }
+      steps {
+            sh 'mvn test -e'
+        }
+        post {
+          always {
+            //archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+            junit testResults: 'target/surefire-reports/*.xml', allowEmptyResults: true
+          }
+        }
+    }
+    stage('PACKAGE') {
+      steps {
+        sh "sh ./devops/scripts/package.sh"
+        stash includes: "$IMAGE_VERSION_FILE", name: 'IMAGE_VERSION_FILE'
+      }
+    }
+    stage('PUSH2REPO') {
+      steps {
+        unstash name: 'IMAGE_VERSION_FILE'
+        sh "sh ./devops/scripts/push2Repo.sh"
+      }
+    }
+    stage('STORE_VERSION') {
+      steps {
+        sh "sh ./devops/scripts/storeVersion.sh"
+      }
+    }
+    stage('DEPLOY') {
+      steps {
+        unstash name: 'IMAGE_VERSION_FILE'
+        sh "sh ./devops/scripts/deploy.sh"
+      }
+    }
+    stage('HEALTH_CHECK') {
+          steps {
+            sh 'sh ./devops/scripts/healthcheck.sh'
+          }
+    }
+    stage('REGISTER_MONITOR') {
+          steps {
+            sh 'sh ./devops/scripts/registerMonitor.sh'
+          }
+    }
+    stage('DOCKER_HOUSEKEEP_IMAGE') {
+      steps {
+        withEnv(["DOCKER_IMAGE_NAME=${APP_NAME}-${ENV}"]) {
+            sh 'sh ./devops/scripts/docker-housekeep-image.sh'
+        }
+      }
+    }
+  }
+}

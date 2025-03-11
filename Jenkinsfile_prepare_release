@@ -1,0 +1,35 @@
+pipeline {
+  agent {
+    label 'mk1'
+  }
+  environment {
+        APP_NAME="springboot-app-scaffold"
+        BRANCH="master"
+  }
+  stages {
+    stage('Upload to nexus and set pom version') {  // remove snapshot keyword and upgrade the pom version
+      steps {
+        // git version: /opt/app-versions/$APP_NAME
+        sh "$HOME/app-git-jenkins-sonar-ci/shell/docker/release/release-app-pom.sh $WORKSPACE $BRANCH $APP_NAME"
+      }
+    }
+    stage('Set prd version and tag image') {
+      steps {
+        // pre image version: /home/jenkins/imageVersion/${APP_NAME}/pre/verNum.${APP_NAME}
+        // prd image version: /opt/app-versions/$APP_NAME-docker-image
+        sh '''
+          $HOME/app-git-jenkins-sonar-ci/shell/docker/release/release-app-app.sh ${APP_NAME}
+        '''
+      }
+    }
+    stage('Push image to aliyun docker repo') {
+      steps {
+        sh '''
+          prd_version=`cat /opt/app-versions/$APP_NAME-docker-image`
+          image_name="$YourCloudDockerRegitryProvider/namespace/${APP_NAME}:${prd_version}"
+          docker push $image_name
+        '''
+      }
+    }
+  }
+}
