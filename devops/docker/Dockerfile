@@ -1,3 +1,4 @@
+# Need to build your base image with Java17
 FROM registry.cn-shenzhen.aliyuncs.com/devops-app/app-baseline-javaspring4app:v1
 
 # 设置参数
