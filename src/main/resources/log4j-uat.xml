@@ -37,7 +37,7 @@
         </layout>
     </appender>
 
-    <!-- hibernate日志输入 -->
+    <!-- Hibernate log output -->
     <logger name="org.hibernate.type.descriptor.sql.BasicBinder"
             level="TRACE"/>
     <logger name="org.hibernate.type.descriptor.sql.BasicExtractor"

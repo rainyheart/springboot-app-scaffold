@@ -4,7 +4,7 @@
 
 	<groupId>org.rainyheart</groupId>
 	<artifactId>springboot-app-scaffold</artifactId>
-	<version>2.1.8</version>
+	<version>3.4.4</version>
 	<packaging>jar</packaging>
 
 	<name>springboot-app-scaffold</name>

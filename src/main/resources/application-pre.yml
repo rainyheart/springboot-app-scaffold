@@ -1,0 +1,16 @@
+server:
+  port: 80
+
+spring:
+  rabbitmq:
+    host: rabbitmq-pre
+    port: 15672
+    username: admin
+    password: admin123
+    virtual-host: preVHost
+
+platform:
+  base-url: https://pre.example.com/api/
+
+logging:
+  config: classpath:log4j-pre.xml

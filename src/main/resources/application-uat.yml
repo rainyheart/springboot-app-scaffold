@@ -1,0 +1,16 @@
+server:
+  port: 80
+
+spring:
+  rabbitmq:
+    host: rabbitmq-uat
+    port: 15674
+    username: admin
+    password: admin123
+    virtual-host: uatVHost
+
+platform:
+  base-url: https://uat.example.com/api/
+
+logging:
+  config: classpath:log4j-uat.xml

@@ -1,0 +1,40 @@
+server:
+  context-path: /springboot-app-scaffold
+  servlet:
+    context-path: /springboot-app-scaffold
+
+spring:
+  application:
+    name: springboot-app-scaffold
+
+management:
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: metrics, health, prometheus, monitoring
+    jmx:
+      exposure:
+        include: metrics, health, prometheus, monitoring
+    metrics:
+      enabled: true
+    health:
+      enabled: true
+    prometheus:
+      enabled: true
+    enabled-by-default: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    tags:
+      application: ${spring.application.name}
+  security:
+    enabled: false
+
+javamelody:
+  enabled: true
+  excluded-datasources: secretSource,topSecretSource
+  spring-monitoring-enabled: true
+  init-parameters:
+    log: true
