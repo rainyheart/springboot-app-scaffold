@@ -1,19 +1,19 @@
 #!/bin/sh
 
-# 环境变量
-## IMAGE_VERSION_FILE，这个是用于保存 docker image version 信息
-##   > 里面保存了镜像的 version 信息 IMAGE_VERSION_NAME，比如：my-app-iam-pre:v18
-## ENV，指定环境参数
+# Environment Variables
+## IMAGE_VERSION_FILE, used to store docker image version information
+##   > Contains image version information IMAGE_VERSION_NAME, e.g.: my-app-iam-pre:v18
+## ENV, specify environment parameters
 
-# 脚本参数
-## 无
+# Script Parameters
+## None
 
-# 结果输出
-## 无
+# Output
+## None
 
-# 脚本作用：
-## 用于保存镜像的版本到本地，用于给生产环境打包的时候，方便获取。
-## > 以后有可能会打包到 git 仓库中，这样就不用专门去指定机器进行部署了。
+# Script Purpose:
+## Used to save image version locally, convenient for production environment packaging.
+## > May be packaged into git repository in the future, eliminating the need for deployment on specific machines.
 
 
 

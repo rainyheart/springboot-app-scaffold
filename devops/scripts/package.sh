@@ -1,17 +1,18 @@
 #!/bin/sh
 
-# 环境变量
-## APP_NAME 应用的名字
-## JAR_FILE_NAME build出来的产品 jar
+# Environment Variables
+## APP_NAME Application name
+## JAR_FILE_NAME Built product jar
 
-# 脚本参数
-## 无
+# Script Parameters
+## None
 
-# 结果输出
-## IMAGE_VERSION_FILE，这个是用于保存 docker image version 信息
-# > 里面保存了镜像的 version 信息 IMAGE_VERSION_NAME，比如：my-app-iam-pre:v18
-# 脚本作用：
-## 打包成docker image
+# Output
+## IMAGE_VERSION_FILE, used to store docker image version information
+# > Contains image version information IMAGE_VERSION_NAME, e.g.: my-app-iam-pre:v18
+
+# Script Purpose:
+## Package into docker image
 
 
 echo "> PACKAGE file begin"

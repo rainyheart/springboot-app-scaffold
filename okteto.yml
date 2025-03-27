@@ -2,7 +2,7 @@ name: springboot-app-scaffold
 namespace: sat
 dev:
   springboot-app-scaffold-sat:
-    image: maven:3.6.3-jdk-8
+    image: maven:3.6.3-openjdk-17
     # command: ["mvn", "spring-boot:run -f ./pom.xml"]
     # image: registry.tencentcloudcr.com/baseline/baseline-javaspring4dev:v1
     command: "chmod +x /usr/local/springboot/debug.sh && /usr/local/springboot/debug.sh"

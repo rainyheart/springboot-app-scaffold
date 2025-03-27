@@ -1,17 +1,17 @@
 #!/bin/sh
 
-# 环境变量
-## APP_NAME 应用的名字
-## ENV，指定环境参数
+# Environment Variables
+## APP_NAME Application name
+## ENV, specify environment parameters
 
-# 脚本参数
-## 无
+# Script Parameters
+## None
 
-# 结果输出
-## 无
+# Output
+## None
 
-# 脚本作用：
-## 从 k8s 配置文件中 获取到相应的 pod 的信息，使用 kubectl 的命令行 去检查部署后的健康情况
+# Script Purpose:
+## Get pod information from k8s configuration file and use kubectl command to check health status after deployment
 
 
 echo "> HEALTH CHECK $APP_NAME  begin"

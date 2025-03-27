@@ -1,18 +1,18 @@
 #!/bin/sh
 
-# 环境变量
-## IMAGE_VERSION_NAME，这个是用于保存 docker image version 信息
-##   > 里面保存了镜像的 version 信息 IMAGE_VERSION_NAME，比如：my-app-iam-pre:v18
-## ENV，指定环境参数
+# Environment Variables
+## IMAGE_VERSION_NAME, used to store docker image version information
+##   > Contains image version information IMAGE_VERSION_NAME, e.g.: my-app-iam-pre:v18
+## ENV, specify environment parameters
 
-# 脚本参数
-## 无
+# Script Parameters
+## None
 
-# 结果输出
-## 无
+# Output
+## None
 
-# 脚本作用：
-## 推送到私有仓库
+# Script Purpose:
+## Push to private repository
 
 
 echo "> PUSH IMAGE ${IMAGE_VERSION_NAME} begin"

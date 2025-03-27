@@ -13,7 +13,7 @@ pipeline {
     stage('BUILD') {
       agent {
         docker {
-          image 'maven:3.6.3-jdk-8' 
+          image 'maven:3.6.3-openjdk-17' 
           args '-e MAVEN_CONFIG=/var/maven/.m2 -v /home/jenkins/.m2:/var/maven/.m2' 
           label 'mk1'
           reuseNode true
@@ -27,7 +27,7 @@ pipeline {
     stage('TEST') {
       agent {
         docker {
-          image 'maven:3.6.3-jdk-8' 
+          image 'maven:3.6.3-openjdk-17' 
           args '-e MAVEN_CONFIG=/var/maven/.m2 -v /home/jenkins/.m2:/var/maven/.m2' 
           label 'mk1'
           reuseNode true
