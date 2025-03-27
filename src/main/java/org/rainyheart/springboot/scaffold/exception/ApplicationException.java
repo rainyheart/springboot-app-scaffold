@@ -12,7 +12,7 @@
 package org.rainyheart.springboot.scaffold.exception;
 
 /**
- * 应用异常
+ * Application exception
  */
 public class ApplicationException extends RuntimeException {
 

@@ -21,7 +21,7 @@ import org.rainyheart.springboot.scaffold.conf.PlatformConfigProperties;
 import org.rainyheart.springboot.scaffold.util.SpringBootProfileEnvVarUtil;
 
 /**
- * springboot 脚手架项目启动类
+ * SpringBoot scaffolding project startup class
  */
 @SpringBootApplication
 @EnableConfigurationProperties({PlatformConfigProperties.class})

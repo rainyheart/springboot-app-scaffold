@@ -16,35 +16,35 @@ package org.rainyheart.springboot.scaffold.common;
  *
  */
 public class Symbol {
-    /** 问号 */
+    /** Question mark */
     public static final String QUESTION = "?";
-    /** 等号 */
+    /** Equal sign */
     public static final String EQUAL = "=";
-    /** 逗号 */
+    /** Comma */
     public static final String COMMA = ",";
-    /** 中文逗号 */
+    /** Chinese comma */
     public static final String COMMA_ZH = "，";
-    /** 冒号 */
+    /** Colon */
     public static final String COLON = ":";
-    /** 逻辑与 */
+    /** Logical AND */
     public static final String AND = "&";
-    /** 逻辑或 */
+    /** Logical OR */
     public static final String OR = "|";
-    /** 连字符 */
+    /** Hyphen */
     public static final String HYPHEN = "-";
-    /** 破折号 */
+    /** Dash */
     public static final String DASH = "——";
-    /** 下划线 */
+    /** Underscore */
     public static final String UNDERLINE = "_";
-    /** 除号 */
+    /** Division sign */
     public static final String DIV = "/";
-    /** 左中括号 */
+    /** Left square bracket */
     public static final String LEFT_BRACKET = "[";
     public static final String HYPHEN_WITH_SPACE = " - ";
     public static final String SPACE = " ";
     public static final String PERCENT = "%";
     public static final String SEMICOLON = ";";
-    /** 点号 */
+    /** Dot */
     public static final String POINT = ".";
     
     private Symbol() {

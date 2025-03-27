@@ -1,3 +1,41 @@
+# Spring Boot Scaffolding Project
+
+A Spring Boot-based scaffolding project designed to provide a robust foundation for building enterprise-grade applications. This project includes essential configurations, utilities, and best practices to kickstart your development process.
+
+## Features
+- **Standard Spring Boot Setup**: Includes a main application class with `@SpringBootApplication` and `@EnableConfigurationProperties` annotations.
+- **Environment-Specific Logging**: Pre-configured `log4j` files for UAT, SAT, and PRE environments.
+- **Custom Exception Handling**: Includes a base [ApplicationException](cci:2://file:///c:/Sandbox/springboot-app-scaffold/src/main/java/org/rainyheart/springboot/scaffold/exception/ApplicationException.java:16:0-31:1) class for consistent error handling.
+- **Common Utilities**: Provides reusable constants for common symbols via the [Symbol](cci:2://file:///c:/Sandbox/springboot-app-scaffold/src/main/java/org/rainyheart/springboot/scaffold/common/Symbol.java:17:0-52:1) class.
+
+## Getting Started
+1. Clone the repository.
+2. Configure your environment-specific properties.
+3. Run the application using `mvn spring-boot:run`.
+
+## Project Structure
+```
+src/
+├── main/
+│   ├── java/
+│   │   └── org/rainyheart/springboot/scaffold/
+│   │       ├── ScaffoldingApplication.java
+│   │       ├── exception/
+│   │       │   └── ApplicationException.java
+│   │       └── common/
+│   │           └── Symbol.java
+│   └── resources/
+│       ├── log4j-pre.xml
+│       ├── log4j-sat.xml
+│       └── log4j-uat.xml
+└── test/
+    └── resources/
+        └── log4j-test.xml
+```
+
+## License
+Copyright (c) 2025 by Ken Ye. All Rights Reserved.
+
 # springboot-app-scaffold
 
 A Spring Boot application scaffold providing essential configurations and utilities for rapid development of enterprise applications.
