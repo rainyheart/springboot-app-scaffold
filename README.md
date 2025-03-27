@@ -83,10 +83,11 @@ Environment is configured via the `ENV` environment variable.
 
 ### Prerequisites
 
-- JDK 8
-- Maven 3.6.3+
-- Docker
-- Kubernetes cluster
+- JDK 17
+- Maven 3.6.3
+- Docker (Optional)
+- Kubernetes cluster (Optional)
+- Jenkins (Optional)
 
 ### Build
 
